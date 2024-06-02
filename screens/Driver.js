@@ -12,7 +12,7 @@ import {
 import MapView, { Polyline, Marker } from 'react-native-maps';
 import BottomButton from '../components/BottomButton';
 import { io } from 'socket.io-client'
-import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
+// import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
 import { socketIoURL } from '../baseUrl'
 export default class Driver extends Component {
   constructor(props) {
@@ -26,50 +26,50 @@ export default class Driver extends Component {
     this.socket = null;
   }
 
-  componentDidMount() {
-    BackgroundGeolocation.configure({
-      desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
-      stationaryRadius: 50,
-      distanceFilter: 50,
-      debug: false,
-      startOnBoot: false,
-      stopOnTerminate: true,
-      locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
-      interval: 10000,
-      fastestInterval: 5000,
-      activitiesInterval: 10000,
-      stopOnStillActivity: false
-    });
+  // componentDidMount() {
+  //   BackgroundGeolocation.configure({
+  //     desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
+  //     stationaryRadius: 50,
+  //     distanceFilter: 50,
+  //     debug: false,
+  //     startOnBoot: false,
+  //     stopOnTerminate: true,
+  //     locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
+  //     interval: 10000,
+  //     fastestInterval: 5000,
+  //     activitiesInterval: 10000,
+  //     stopOnStillActivity: false
+  //   });
 
-    BackgroundGeolocation.on('authorization', (status) => {
-      console.log(
-        '[INFO] BackgroundGeolocation authorization status: ' + status
-      );
-      if (status !== BackgroundGeolocation.AUTHORIZED) {
-        // we need to set delay or otherwise alert may not be shown
-        setTimeout(
-          () =>
-            Alert.alert(
-              'App requires location tracking permission',
-              'Would you like to open app settings?',
-              [
-                {
-                  text: 'Yes',
-                  onPress: () => BackgroundGeolocation.showAppSettings()
-                },
-                {
-                  text: 'No',
-                  onPress: () => console.log('No Pressed'),
-                  style: 'cancel'
-                },
-                ,
-              ]
-            ),
-          1000
-        );
-      }
-    });
-  }
+  //   BackgroundGeolocation.on('authorization', (status) => {
+  //     console.log(
+  //       '[INFO] BackgroundGeolocation authorization status: ' + status
+  //     );
+  //     if (status !== BackgroundGeolocation.AUTHORIZED) {
+  //       // we need to set delay or otherwise alert may not be shown
+  //       setTimeout(
+  //         () =>
+  //           Alert.alert(
+  //             'App requires location tracking permission',
+  //             'Would you like to open app settings?',
+  //             [
+  //               {
+  //                 text: 'Yes',
+  //                 onPress: () => BackgroundGeolocation.showAppSettings()
+  //               },
+  //               {
+  //                 text: 'No',
+  //                 onPress: () => console.log('No Pressed'),
+  //                 style: 'cancel'
+  //               },
+  //               ,
+  //             ]
+  //           ),
+  //         1000
+  //       );
+  //     }
+  //   });
+  // }
 
   async lookForPassengers() {
     if (this.state.lookingForPassengers) {
